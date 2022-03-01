@@ -95,11 +95,31 @@ Plots
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/branddist.pdf" width="700"  /></kbd>
+<kbd><img src="images/carbrandcount.png" width="1000"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 4:</b> Plot describes price distribution by car brand for each of the 16 most common car brands.</sub></i></p>
+<p align="center"><i><sub><b>Figure 4:</b> Plot describes the quantity of used cars for sale in the UK for the 30 most common brands.</sub></i></p>
 <br>
 
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/branddist.png" width="1000"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 5:</b> Plot describes price distribution by car brand for each of the 16 most common car brands.</sub></i></p>
+<br>
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/yearprice.png" width="1000"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 6:</b> Plot describes the average used car price by year produced. Blac confidence bounds at the top of each bar can be seen to grow wider as cars grow older due to a reduced number of cars for sale from each year. The same effect can be seen for used cars from 2022.</sub></i></p>
+<br>
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/transdist.png" width="400"  /></kbd>&nbsp; &nbsp; &nbsp; &nbsp;<kbd><img src="images/drivetraindist.png" width="400"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 7:</b> Plot describes price distribution by car transmission on the left and by car drivetrain on the right.</sub></i></p>
+<br>
 
 # Modelling
 
