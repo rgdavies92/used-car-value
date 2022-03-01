@@ -18,7 +18,7 @@ A global shortage of computer chips used in car production, as well as other mat
 
 It’s estimated the chip crisis will cause 100,000 vehicles to not be delivered before the end of 2021, representing a huge blow for the industry. 
 
-<b>Given that the chip shortage is unlikely to be resolved in the immediate future, now more than ever it would be helpful to be able to identify good value in the UK used car market.</b>
+<b>Given that the chip shortage is unlikely to be resolved in the immediate future, now more than ever it would be helpful to be able to identify good value in the UK used car market. That is what this project intends to do.</b>
 
 # Objectives
 
@@ -33,7 +33,34 @@ My secondary objective is to test the hypothesis that:
 
 # Data Acquisition
 
-The data for this project came from [autotrader.co.uk](https://www.autotrader.co.uk/). Although AutoTradader to have an API, access is only permitted with a commercial contract. As such, the data had to be obtained through use of a web scraper. 
+The data for this project came from [autotrader.co.uk](https://www.autotrader.co.uk/). Although AutoTradader do have an API, access is only permitted with a commercial contract. As such, the project data had to be obtained through use of a web scraper. Figure 1 below describes a typical search result on autotrader.co.uk
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/autotrader.png" width="700"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 1:</b> Sample autotrader.co.uk search result page with scraped fields highlighted in green.</sub></i></p>
+<br>
+
+Evidently, each car listing is rich in information. At this early stage in the project a 'more is more' approach was adopted. It was intended to gather all information in as few web scrapes as possible, without duplicating work by going back to revisit a car listing at a later date. Of particular interest was the free-form text box between car year and car price - often where car listings were lacking in specific details such as BHP, engine size or number of doors, they could be found and recovered from this string using RegEx. 
+
+```python3
+# Iterate over missing engine rows and use RegEx on name_subtitle to extract engine size where possible. 
+
+for index, car in ucars[ucars['engine'].isnull()].iterrows():
+    car_subname = ucars.loc[index, 'name_subtitle']
+    try:
+        enginesize = re.findall('([0-9][.][0-9]+)',car_subname)[0]
+    except: 
+        enginesize = np.nan
+    ucars.loc[index,'engine'] = float(enginesize)
+
+# Remove L from each engine size.
+ucars.engine= ucars.engine.apply(lambda x: float(str(x).replace('L','')))
+
+# Drop remaining 105 used cars without engine size.
+ucars.dropna(subset=['engine'],inplace=True)
+```
 
 # Data Cleaning and EDA
 
