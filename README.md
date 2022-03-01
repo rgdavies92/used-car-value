@@ -44,11 +44,11 @@ The data for this project came from [autotrader.co.uk](https://www.autotrader.co
 
 Evidently, each car listing is rich in information. At this early stage in the project a 'more is more' approach was adopted. It was intended to gather all information in as few web scrapes as possible, without duplicating work by going back to revisit a car listing at a later date. Of particular interest was the free-form text box between car year and car price - often where car listings were lacking in specific details such as BHP, engine size or number of doors, they could be found and recovered from this string using RegEx. 
 
-400,247 new and used cars were successfully scraped from AutoTrader. 
+Over 400,000 new and used cars were successfully scraped from AutoTrader. 
 
-Two problems encoutered during web scraping:
+Two problems overcome during web scraping:
 * Problem 1 involved a hard limit on the search results. Search results were limited to 1000 car listings per search. This is not a problem if the search criteria are highly specific as the platform would expect, although for this project it was important to return all car listings. To navigate this problem, thousands of complimentary searches were performed and the number of returned results were verified to be less than 1000 before continuing to scrape the data.
-* The solution to problem 1 likely contributed to problem 2; The searching behaviour was being flagged as problematic by the website. AutoTrader employ Cloudflare website security to prevent algorithms like this overloading their server with requests. The security successfuly prevented the Python Requests package from gaining access to search results, however switching to Cloudscraper instead resolved all issues. 
+* The solution to problem 1 likely contributed to problem 2; the searching behaviour was being flagged as problematic by the website. AutoTrader employ Cloudflare website security to prevent algorithms like this overloading their server with requests. The security successfuly prevented the Python Requests package from gaining access to search results, however switching to Cloudscraper instead resolved all issues. 
 
 After a small number of iterative improvements to the web scraping function, the dataset was scraped in four days in the week commencing 31/01/2022. This is the date at which data are accurate.
 
@@ -56,14 +56,24 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center" width="100%">
 <kbd><img src="images/predictors.png" width="500" /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 2:</b> Exhaustive list of the data points scraped for each car listing. Not all of them persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
+<p align="center"><i><sub><b>Figure 2:</b> Exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
-# Data Cleaning and EDA
+# Data Cleaning and Feature Engineering
+
+## Data Cleaning
+
+The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning perfomred in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
+* BHP data were standardised in terms of units
+* Dealer location and rating data were extracted from the associated dealer href
+* Engine size was populated using RegEx - see figure 3 below. This was particularly problematic for electric vehicles as they don't have cylinders in the engine and measure size in units of kilowatts instead of litres. An additional e_engine column was added to differentiate.
+* Number of doors was populated and standardised using RegEx. Interestingly pickup trucks describe doors in a different way to all other cars.
+* Added a used/new flag to allow for simple filtering.
+* Utilised GeoPy with the Google Maps API to obtain dealer county information. This involved moving from dealer location, which was often a city or an area, to dealer latitude and longitude before reverting back to dealder county.
 
 ```python3
 # Iterate over missing engine rows and use RegEx on name_subtitle to extract engine 
-# size where possible. 
+# size where possible. Note that electric engines are handled differently.
 
 for index, car in ucars[ucars['engine'].isnull()].iterrows():
     car_subname = ucars.loc[index, 'name_subtitle']
@@ -72,18 +82,14 @@ for index, car in ucars[ucars['engine'].isnull()].iterrows():
     except: 
         enginesize = np.nan
     ucars.loc[index,'engine'] = float(enginesize)
-
-# Remove L from each engine size.
-ucars.engine= ucars.engine.apply(lambda x: float(str(x).replace('L','')))
-
-# Drop remaining 105 used cars without engine size.
-ucars.dropna(subset=['engine'],inplace=True)
 ```
 </p>
 <p align="center"><i><sub><b>Figure 3:</b> Sample codeblock using RegEx to extract missing enginesize data.</sub></i></p>
 <br>
 
-Data dictionary
+With all data cleaning and feature engineering finished, there were 400,247 new and used cars in the dataset. 378,597 of these were used cars, which this project focuses on. A [data dictionary file](data_dictionary.md) has been prepared to provide further detail. 
+
+# Exploratory Data Analysis
 
 Plots
 
