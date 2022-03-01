@@ -93,6 +93,14 @@ With all data cleaning and feature engineering finished, there were 400,247 new 
 
 Plots
 
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/branddist.pdf" width="700"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 4:</b> Plot describes price distribution by car brand for each of the 16 most common car brands.</sub></i></p>
+<br>
+
+
 # Modelling
 
 # Evaluation
