@@ -63,10 +63,10 @@ After a small number of iterative improvements to the web scraping function, the
 
 ## Data Cleaning
 
-The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning perfomred in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
-* BHP data were standardised in terms of units
-* Dealer location and rating data were extracted from the associated dealer href
-* Engine size was populated using RegEx - see figure 3 below. This was particularly problematic for electric vehicles as they don't have cylinders in the engine and measure size in units of kilowatts instead of litres. An additional e_engine column was added to differentiate.
+The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
+* BHP data were standardised in terms of units. Some more recent cars were reported in units of PS - the German equivalent.
+* Dealer location and rating data were extracted from the associated dealer href.
+* Engine size was populated using RegEx - see figure 3 below. This was particularly problematic for electric vehicles as they don't have cylinders. in the engine and measure size in units of kilowatts instead of litres. An additional e_engine column was added to differentiate.
 * Number of doors was populated and standardised using RegEx. Interestingly pickup trucks describe doors in a different way to all other cars.
 * Added a used/new flag to allow for simple filtering.
 * Utilised GeoPy with the Google Maps API to obtain dealer county information. This involved moving from dealer location, which was often a city or an area, to dealer latitude and longitude before reverting back to dealder county.
@@ -84,7 +84,7 @@ for index, car in ucars[ucars['engine'].isnull()].iterrows():
     ucars.loc[index,'engine'] = float(enginesize)
 ```
 </p>
-<p align="center"><i><sub><b>Figure 3:</b> Sample codeblock using RegEx to extract missing enginesize data.</sub></i></p>
+<p align="center"><i><sub><b>Figure 3:</b> Sample data cleaning codeblock using RegEx to extract missing engine size data.</sub></i></p>
 <br>
 
 With all data cleaning and feature engineering finished, there were 400,247 new and used cars in the dataset. 378,597 of these were used cars, which this project focuses on. A [data dictionary file](data_dictionary.md) has been prepared to provide further detail. 
