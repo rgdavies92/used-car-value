@@ -202,22 +202,39 @@ With the ELI5 analysis of the final model in place, the inner workings of the mo
 
 With the model finalised it was then possible to test the hypothesis; <i>is a Dacia cheaper than a Volvo?</i>
 
-To verify this hypothetsis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs analysed. 
+To verify this hypothetsis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs plotted below in figure 13. 
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/fakecarbrand.png" width="1000"  /></kbd>
+<kbd><img src="images/fakecarbrand.png" width="900"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 13:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
+<p align="center"><i><sub><b>Figure 13:</b> Synthetic car value plot where all attributes are constant but car brand. YEar was fixed at 2018, mileage was fixed at 30000 and BHP was fixed at 100. Volvo and Dacia brands associated with the hypothesis have been coloured red.</sub></i></p>
 <br>
+
+Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ssangyong is the least expensive car brand modelled. It also confirms the hypothesis that a Dacia branded car is indeed cheaper than a Volvo branded car. A Dacia is the third cheapest brand of the used cars modelled in this project. The hypothesis has been validated as true and the <b>LINK TO TOP</B> secondary project objective has been satisfied. 
 
 # Limitations
 
-It is assumed that the used cars truly sell at this price. The data are car listings rather than car sales and so may carry a degree of bias.
+Having satisfied both project objectives, there are a number of limitations to be aware of.
+* This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
+* The gathered data may go stale quickly. The background to this project<b>LINK</b> noted how different pressures are acting on the UK used car market in early 2022. If these conditions were to change and the market changed too then the base data for this project would become less appropriate. If this model is to be used to inform used car buying decisions then it is recommended to gather fresh data.
+* Numerous data entry errors have been identified throughout data cleaning, but only ones which could be identified as statistical anomalies. Non-remarkable data entry errors would harm the model but are difficult to identify. The gathered data is only as accurate as the used car dealers creating the car listings. 
+* Finally, 'car specification' is not captured well in the dataset. Each new car on sale comes with numerous optional extras in terms of 'trim' or performance which are certainly applicable to used cars too but not well captured by this model. In fact, the largest outliers in the final price residual distribution have been attributed to unusual or rare specifications. Figure 14 below shows the car listing for the largest outlier.
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/outlier.png" width="900"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 14:</b> Synthetic car value plot where all attributes are constant but car brand. Year was fixed at 2018, mileage was fixed at 30000 and BHP was fixed at 100. Volvo and Dacia brands associated with the hypothesis have been coloured red.</sub></i></p>
+<br>
 
 # Conclusions
 
 # Further Work
+
+## Car Boot Volume Data
+
+## Dealer Location Data
 
 # Key Learnings and Challenges
 
