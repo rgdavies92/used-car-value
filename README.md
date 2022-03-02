@@ -225,7 +225,7 @@ Having satisfied both project objectives, there are a number of limitations to b
 <p align="center" width="100%">
 <kbd><img src="images/outlier.png" width="900"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 14:</b> Synthetic car value plot where all attributes are constant but car brand. Year was fixed at 2018, mileage was fixed at 30000 and BHP was fixed at 100. Volvo and Dacia brands associated with the hypothesis have been coloured red.</sub></i></p>
+<p align="center"><i><sub><b>Figure 14:</b> The car listing which caused the greatest discrepancy between true price and predicted price is imaged above. As described in the limitations, the model does no handle vehicles with non-standard features well, and this mobile office is highly irregular! </sub></i></p>
 <br>
 
 # Conclusions
