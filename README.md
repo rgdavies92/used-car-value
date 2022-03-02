@@ -120,12 +120,16 @@ Figure 5 tells many stories about the price distribution of the different car br
 <p align="center"><i><sub><b>Figure 6:</b> Plot describes the average used car price by year produced. Black confidence bounds at the top of each bar can be seen to grow wider as cars grow older due to a reduced number of cars for sale from each year. The same effect can be seen for used cars from 2022.</sub></i></p>
 <br>
 
+The average used car value plot by year produced points out an interesting non-linear relationship between used car price and age. Average used car price seems to fall from 2022 produced cars to 2003 produced cars at which point it begins to rise slightly. This may be due to the influence of some sort of unexplained vintage-factor. The fact that this relationship is not perfeclty linear may have implications for linear models, to be broached in the modelling section. 
+
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/transdist.png" width="400"  /></kbd>&nbsp; &nbsp; &nbsp; &nbsp;<kbd><img src="images/drivetraindist.png" width="400"  /></kbd>
+<kbd><img src="images/transdist.png" width="350"  /></kbd>&nbsp; &nbsp; &nbsp; &nbsp;<kbd><img src="images/drivetraindist.png" width="350"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 7:</b> Plot describes price distribution by car transmission on the left and by car drivetrain on the right.</sub></i></p>
 <br>
+
+Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determinining used car value. Manual trasmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may becasue rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
 
 # Modelling
 
