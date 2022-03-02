@@ -56,7 +56,7 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center" width="100%">
 <kbd><img src="images/predictors.png" width="500" /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 2:</b> Exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
+<p align="center"><i><sub><b>Figure 2:</b> Non-exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
 # Data Cleaning and Feature Engineering
@@ -100,7 +100,7 @@ There were no immediate surprises in the EDA. The dataset was scruitinised from 
 <p align="center"><i><sub><b>Figure 4:</b> Plot describes the quantity of used cars for sale in the UK for the 30 most common brands.</sub></i></p>
 <br>
 
-Evidently a BMW is the most common used car for sale in the UK right now making up just under 10% of all used cars on AutoTrader. German brands do well in general, with four of the top five most common brands from Germany. 
+Evidently a BMW is the most common used car for sale in the UK right now, making up just under 10% of all used cars on AutoTrader. German brands do well in general, with four of the top five most common brands from Germany. 
 
 <br>
 <p align="center" width="100%">
@@ -131,28 +131,74 @@ Figure 7 is the final plot in this EDA section and images the used car price dis
 
 # Modelling
 
+For car listing features which were used in the following modelling process, refer to blue font in figure 2.
+
 ## Selecting a Model
 
-A range of nine predictive models were evaluated on a random subset of 50,000 used cars in order to provide a quick evaluation of model suitability. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
+A range of nine regression modelling methods were evaluated on a random subset of 50,000 in order to provide a quick evaluation of model suitability. The data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-valiation was employed on the training dataset to reduce overfitting. Parameters for each model were optimised via method specific grid searching. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/modelsummary.png" width="700"  /></kbd>
+<kbd><img src="images/modelsummary.png" width="600"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
 <br>
 
 The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower residual distribution.
 
-Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegressor() on the test dataset, the GradientBoostingRegressor() model was evidenced to contain less variance and so was selected as the optimal model to proceed with. 
+Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegressor() on the test dataset, the GradientBoostingRegressor() model was evidenced to contain less variance.
 
 ## The Final Model
 
-# Evaluation
+A Gradient Boosting Regressor model from the Scikit-learn package was selected as the optimal model to procede with on the full dataset; this is one of the decision tree based methods. As before, the data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-valiation was employed on the training dataset to reduce overfitting. Increasing the number of cars from 50,000 to 378,597 served to both increase model run-times and further reduce model variance.
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/modelscores.png" width="300"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 9:</b> Optimal model scoring metrics evaluated on the test and train datasets. </sub></i></p>
+<br>
+
+The final model can be seen to explain 95% of the variance in used car price within the dataset that is not explained by the baseline (average) model. RMSE for the final model is approximately £2500 - note that this model scoring metric is weighted towards the larger errros. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/actpred.png" width="450"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 10:</b> True listing price vs predicted used car price.</sub></i></p>
+<br>
+
+# Model Interpretation
+
+## Feature Importance
+
+Scikit-learn can quickly produce the feature importance, or gini importance associated with the model. This is defined to be the normalised total-reduction of the criterion by each feature, or more simiply this could be interpreted as 'how helpful each of the predictors were in define tree branches within the model'. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/featimp.png" width="300"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 11:</b> Feature importances or Gini importances attributed to the top 10 most influential predictors within the Gradient Boosting model. </sub></i></p>
+<br>
+
+A downside to the feature importance measured above in figure 11 is that it does not capture the nature of the relationship between each of the predictors and the target, i.e. whether it a positive or negative predictor. For example, based on the distribution in figure 7 it is observe that a front-wheel-drive used car is generally cheaper or below average price, however the feature importance only informs that it is the 8th most important feature in determining used car price. This form of feature importance does not satisfy the initial objective that any produced model must be interpretable to identify value.
+
+## Permutation Importance with ELI5 and USed Car Value Breakdown
+
+To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will remove one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After permutation importance has been calculated ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative.
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/ELI5.png" width="700"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 12:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
+<br>
 
 # Findings
 
 # Limitations
+
+It is assumed that the used cars truly sell at this price. The data are car listings rather than car sales and so may carry a degree of bias.
 
 # Conclusions
 
