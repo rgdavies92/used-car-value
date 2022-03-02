@@ -189,15 +189,27 @@ To combat the identified shotcomings of feature importance the Explain it Like I
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/ELI5.png" width="1100"  /></kbd>
+<kbd><img src="images/ELI5V2.png" width="600"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 12:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
 <br>
 
 The green and red box to the left is a raw output from ELI5's <i>show_weights</i> function, with positive predictors in green and negative predictors in red. Notice how despite this car being Ford, the fact that this car is also not a Land Rover has an impact on the predicted price. It is relationships like this which have been collapsed into a single accumulated price impact in the central table. As this feature is particularly useful, there are more examples of used car value breakdowns to be found in <b>THE LINKED NON-TECHNICAL PRESENTAION</b>.
 
+With the ELI5 analysis of the final model in place, the inner workings of the model have become suitably explainable and transparent. The <b>LINK TO TOP</B> primary objective has been satisfied.
 
-# Findings
+# Validating the Hypothesis
+
+With the model finalised it was then possible to test the hypothesis; <i>is a Dacia cheaper than a Volvo?</i>
+
+To verify this hypothetsis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs analysed. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/fakecarbrand.png" width="1000"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 13:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
+<br>
 
 # Limitations
 
