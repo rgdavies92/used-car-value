@@ -61,8 +61,6 @@ After a small number of iterative improvements to the web scraping function, the
 
 # Data Cleaning and Feature Engineering
 
-## Data Cleaning
-
 The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
 * BHP data were standardised in terms of units. Some more recent cars were reported in units of PS - the German equivalent.
 * Dealer location and rating data were extracted from the associated dealer href.
@@ -132,6 +130,23 @@ The average used car value plot by year produced points out an interesting non-l
 Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determinining used car value. Manual trasmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may becasue rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
 
 # Modelling
+
+## Selecting a Model
+
+A range of nine predictive models were evaluated on a random subset of 50,000 used cars in order to provide a quick evaluation of model suitability. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/modelsummary.png" width="700"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
+<br>
+
+The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower residual distribution.
+
+Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegressor() on the test dataset, the GradientBoostingRegressor() model was evidenced to contain less variance and so was selected as the optimal model to proceed with. 
+
+## The Final Model
 
 # Evaluation
 
