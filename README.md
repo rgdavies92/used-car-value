@@ -139,12 +139,12 @@ A range of nine regression modelling methods were evaluated on a random subset o
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/modelsummary.png" width="600"  /></kbd>
+<kbd><img src="images/modelsummary.png" width="500"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
 <br>
 
-The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower residual distribution.
+The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower, residual distribution.
 
 Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegressor() on the test dataset, the GradientBoostingRegressor() model was evidenced to contain less variance.
 
@@ -176,23 +176,26 @@ Scikit-learn can quickly produce the feature importance, or gini importance asso
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/featimp.png" width="300"  /></kbd>
+<kbd><img src="images/featimp.png" width="450"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 11:</b> Feature importances or Gini importances attributed to the top 10 most influential predictors within the Gradient Boosting model. </sub></i></p>
 <br>
 
 A downside to the feature importance measured above in figure 11 is that it does not capture the nature of the relationship between each of the predictors and the target, i.e. whether it a positive or negative predictor. For example, based on the distribution in figure 7 it is observe that a front-wheel-drive used car is generally cheaper or below average price, however the feature importance only informs that it is the 8th most important feature in determining used car price. This form of feature importance does not satisfy the initial objective that any produced model must be interpretable to identify value.
 
-## Permutation Importance with ELI5 and USed Car Value Breakdown
+## Permutation Importance with ELI5 and Used Car Value Breakdown
 
-To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will remove one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After permutation importance has been calculated ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative.
+To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will remove one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After the permutation importance has been obtained, ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative. Figure 12 below steps through the way in which ELI5 has been used to generate a used car value breakdown. 
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/ELI5.png" width="700"  /></kbd>
+<kbd><img src="images/ELI5.png" width="1100"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 12:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
 <br>
+
+The green and red box to the left is a raw output from ELI5's <i>show_weights</i> function, with positive predictors in green and negative predictors in red. Notice how despite this car being Ford, the fact that this car is also not a Land Rover has an impact on the predicted price. It is relationships like this which have been collapsed into a single accumulated price impact in the central table. As this feature is particularly useful, there are more examples of used car value breakdowns to be found in <b>THE LINKED NON-TECHNICAL PRESENTAION</b>.
+
 
 # Findings
 
