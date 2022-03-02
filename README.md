@@ -89,9 +89,11 @@ for index, car in ucars[ucars['engine'].isnull()].iterrows():
 
 With all data cleaning and feature engineering finished, there were 400,247 new and used cars in the dataset. 378,597 of these were used cars, which this project focuses on. A [data dictionary file](data_dictionary.md) has been prepared to provide further detail. 
 
-# Exploratory Data Analysis
+# Exploratory Data Analysis (EDA)
 
-Plots
+Although this is a used car project, data have been scraped and cleaned for both new and used cars. It was at this point, the beginning of the EDA that new cars were dropped to focus on used cars only. 
+
+There were no immediate surprises in the EDA. The dataset was scruitinised from a number of different angles to check for patterns and trends. Some of the more descriptive relatonships within the dataset are captured in figures 4-7 below, with a more comprehensive EDA to be found in the <b>LINKED JUPYTER NOTEBOOK</b>.
 
 <br>
 <p align="center" width="100%">
@@ -100,6 +102,8 @@ Plots
 <p align="center"><i><sub><b>Figure 4:</b> Plot describes the quantity of used cars for sale in the UK for the 30 most common brands.</sub></i></p>
 <br>
 
+Evidently a BMW is the most common used car for sale in the UK right now making up just under 10% of all used cars on AutoTrader. German brands do well in general, with four of the top five most common brands from Germany. 
+
 <br>
 <p align="center" width="100%">
 <kbd><img src="images/branddist.png" width="1000"  /></kbd>
@@ -107,11 +111,13 @@ Plots
 <p align="center"><i><sub><b>Figure 5:</b> Plot describes price distribution by car brand for each of the 16 most common car brands.</sub></i></p>
 <br>
 
+Figure 5 tells many stories about the price distribution of the different car brands displayed. Land Rover, Mercedes-Benz and Volvo stand out as some of the most expensive used cars brands, with Vauxhall and Renault the least expensive. beyond this the skew of each brand distribution tells of how varied their car offering is. The high skew brands such as Land Rover, Audi, BMW and Mercedes-Benz have a greater number of cars for sale beyond the 95th percentile and it can be deduced that these brands cater to the high-end car market as well as to their prime market between the 1st and 3rd interquartile ranges. The same cannot be said for brands like Mini, where the skew is much reduced.
+
 <br>
 <p align="center" width="100%">
 <kbd><img src="images/yearprice.png" width="1000"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 6:</b> Plot describes the average used car price by year produced. Blac confidence bounds at the top of each bar can be seen to grow wider as cars grow older due to a reduced number of cars for sale from each year. The same effect can be seen for used cars from 2022.</sub></i></p>
+<p align="center"><i><sub><b>Figure 6:</b> Plot describes the average used car price by year produced. Black confidence bounds at the top of each bar can be seen to grow wider as cars grow older due to a reduced number of cars for sale from each year. The same effect can be seen for used cars from 2022.</sub></i></p>
 <br>
 
 <br>
