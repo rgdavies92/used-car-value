@@ -6,6 +6,28 @@ This project was completed as part of the General Assembly Data Science Immersiv
 
 # Table of Contents
 
+- [Background and Problem Statement](#background-and-problem-statement)<br> 
+- [Objectives](#objectives)<br>
+- [Data Acquisition](#data-acquisition)<br>
+- [Data Cleaning and Feature Engineering](#data-cleaning-and-feature-engineering)<br>
+- [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)<br>
+- [Modelling](#modelling)<br>
+    - [Selecting a Model](#selecting-a-model)<br>
+    - [The Final Model](#the-final-model)<br>
+- [Model Interpretation](#model-interpretation)<br>
+    - [Feature Importance](#feature-importance)<br>
+    - [Permutation Importance with ELI5 and Used Car Value Breakdown](#permutation-importance-with-eli5-and-used-car-value-breakdown)<br>
+- [Validating the Hypothesis](#validating-the-hypothesis)<br>
+- [Limitations](#limitations)<br>
+- [Conclusions](#conclusions)<br>
+- [Identifying Further Work](#identifying-further-work)<br>
+- [Further Work Attempted - Additional Predictors](#further-work-attempted---additional-predictors)<br>
+    - [Car Boot Volume Data](#car-boot-volume-data)<br>
+    - [Dealer Location Data](#dealer-location-data)<br>
+    - [Modelling Impact](#modelling-impact)<br>
+- [Key Learnings and Challenges](#key-learnings-and-challenges)<br>
+- [Contact](#contact)<br>
+
 # Background and Problem Statement
 
 The second-hand car market in the UK is currently thriving due to the shortage of new models and cars under three years of age. According to [some figures](https://www.bbc.com/news/business-58150025) the used car market has grown astronomically since the pandemic began, with more than 2.2 million used cars exchanged since 2019.  
@@ -278,7 +300,7 @@ In order to progress the project futher, some of the further work ideas have bee
 
 # Further Work Attempted - Additional Predictors
 
-### Car Boot Volume Data
+## Car Boot Volume Data
 
 [Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car.
 
@@ -296,7 +318,7 @@ Although it can be explained quickly, gathering, cleaning and merging predictor 
 
 The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
 
-### Dealer Location Data
+## Dealer Location Data
 
 The GeoPy package and Google Maps API have been used to create a categorical predictor detailing the dealer county. The initial hunch was that used cars near London might cost more than those further away from London, and that including dealer location in predictors might improve model performance. 
 
@@ -311,7 +333,7 @@ Although most car listings did have some degree of dealer location information, 
 
 Figure 17 seems to disprove the original hunch that cars cost more near London. The most expensive county for average used car price is Mid Ulster, whilst the least expensive county is Anglesey. 
 
-### Modelling Impact
+## Modelling Impact
 
 For a fair comparison, three new models were generated using the same 319,663 rows of used car data and different sets of predictor variables; exisiting predictors, existing predictors plus boot size data and existing predictors plus dealer county data. 
 
