@@ -170,6 +170,8 @@ The final model can be seen to explain 95% of the variance in used car price wit
 
 # Model Interpretation
 
+On the trade-off cross-plot of accuracy against interpretability, Gradient Boosting methods are generally deemed to be more accurate than interpretable. 
+
 ## Feature Importance
 
 Scikit-learn can quickly produce the feature importance, or gini importance associated with the model. This is defined to be the normalised total-reduction of the criterion by each feature, or more simiply this could be interpreted as 'how helpful each of the predictors were in define tree branches within the model'. 
@@ -194,7 +196,7 @@ To combat the identified shotcomings of feature importance the Explain it Like I
 <p align="center"><i><sub><b>Figure 12:</b> Engineered used car value breakdown using permutation importance from the ELI5 package.</sub></i></p>
 <br>
 
-The green and red box to the left is a raw output from ELI5's <i>show_weights</i> function, with positive predictors in green and negative predictors in red. Notice how despite this car being Ford, the fact that this car is also not a Land Rover has an impact on the predicted price. It is relationships like this which have been collapsed into a single accumulated price impact in the central table. As this feature is particularly useful, there are more examples of used car value breakdowns to be found in <b>THE LINKED NON-TECHNICAL PRESENTAION</b>.
+The green and red box at the top is a raw output from ELI5's <i>show_weights</i> function, with positive predictors in green and negative predictors in red. Notice how despite this car being Ford, the fact that this car is also not a Land Rover has an impact on the predicted price. It is relationships like this which have been collapsed into a single accumulated price impact in the central table. As this feature is particularly useful, there are more examples of used car value breakdowns to be found in <b>THE LINKED NON-TECHNICAL PRESENTAION</b>.
 
 With the ELI5 analysis of the final model in place, the inner workings of the model have become suitably explainable and transparent. The <b>LINK TO TOP</B> primary objective has been satisfied.
 
@@ -225,12 +227,34 @@ Having satisfied both project objectives, there are a number of limitations to b
 <p align="center" width="100%">
 <kbd><img src="images/outlier.png" width="900"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 14:</b> The car listing which caused the greatest discrepancy between true price and predicted price is imaged above. As described in the limitations, the model does no handle vehicles with non-standard features well, and this mobile office is highly irregular! </sub></i></p>
+<p align="center"><i><sub><b>Figure 14:</b> The car listing which yielded the greatest discrepancy between true price and predicted price is imaged above. As described in the limitations, the model does not handle vehicles with non-standard features well, and this Mercedes-Benz mobile office is highly irregular! </sub></i></p>
 <br>
 
 # Conclusions
 
+In short, all project objectives have been met.
+
+* A predictive model has been generated which can predicted used car price with an R<sup>2</sup> score of 0.954. This model is built using a gradient boosting regressor from Scikit-learn and the ELI5 package has been used to illuminate how it operates 'under the hood' to better understand what generates value in the used car market.
+* Synthetic cars have been used to investigate the price influence of each car brand. The Dacia brand is confirmed to be cheaper than the Volvo brand. 
+
+One further implementation of the work within this project is that it could be used to predict the price depreciation of a car. This prediction over time would be subject to the same market conditions as discussed in the project limitations and may need to account for economic inflation but the conceptually it is possible. Figure 15 below illustrates an ambitious twenty year price prediction for my 2008 Volkswagen Polo, assuming a constant 7000 miles per year. Economic conditions have not been compensated in this prediction. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/polo.png" width="450"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 15:</b> Future price prediction of 2008 Volkswagen Polo assuming 7000 miles each year. This plot assumes that economic conditions are constant over time. </sub></i></p>
+<br>
+
 # Further Work
+
+A number of interesting avenues have been identified for possible future work:
+
+* A deep learning modelling method may be able to improve the accuracy of price prediction.
+* The gradient boosting model may be enhanced through the introduction of additional predictors:
+  * Would additional information on used car boot size improve the model?
+  * A London price premium is common in the houseing market, would additional information about dealer location improve the model?
+* It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. This gauge is not available on every listing and would require a new web scrape, however it would pose an interesing classification problem. 
 
 ## Car Boot Volume Data
 
