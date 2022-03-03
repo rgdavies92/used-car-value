@@ -252,11 +252,16 @@ A number of interesting avenues have been identified for possible future work:
 
 * A deep learning modelling method may be able to improve the accuracy of price prediction.
 * The gradient boosting model may be enhanced through the introduction of additional predictors:
-  * Would additional information on used car boot size improve the model?
-  * A London price premium is common in the houseing market, would additional information about dealer location improve the model?
+  * Would additional information on car boot size improve the model?
+  * Would additional information about dealer location improve the model?
 * It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. This gauge is not available on every listing and would require a new web scrape, however it would pose an interesing classification problem. 
 
+In order to progress the project futher, some of the further work ideas have been addressed below.
+
 ## Car Boot Volume Data
+
+<img align="left" src=images/carsized.png>[Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car. 
+ 
 
 ## Dealer Location Data
 
