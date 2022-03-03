@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/69991618/111783988-c2483380-88b2-11eb-806b-6e2bbd495298.png" width="100"/> 
-</p>
-
 # Understanding Value in the UK Used Car Market in 2022
 
 # Context
@@ -25,6 +21,7 @@ It’s estimated the chip crisis will cause 100,000 vehicles to not be delivered
 My primary objective for this project is to:
 
 * Generate a predictive model for used car price in the UK in 2022.
+
 * The final model must be interpretable.
 
 My secondary objective is to test the hypothesis that:
@@ -47,7 +44,9 @@ Evidently, each car listing is rich in information. At this early stage in the p
 Over 400,000 new and used cars were successfully scraped from AutoTrader. 
 
 Two problems overcome during web scraping:
+
 * Problem 1 involved a hard limit on the search results. Search results were limited to 1000 car listings per search. This is not a problem if the search criteria are highly specific as the platform would expect, although for this project it was important to return all car listings. To navigate this problem, thousands of complimentary searches were performed and the number of returned results were verified to be less than 1000 before continuing to scrape the data.
+
 * The solution to problem 1 likely contributed to problem 2; the searching behaviour was being flagged as problematic by the website. AutoTrader employ Cloudflare website security to prevent algorithms like this overloading their server with requests. The security successfuly prevented the Python Requests package from gaining access to search results, however switching to Cloudscraper instead resolved all issues. 
 
 After a small number of iterative improvements to the web scraping function, the dataset was scraped in four days in the week commencing 31/01/2022. This is the date at which data are accurate.
@@ -63,10 +62,15 @@ After a small number of iterative improvements to the web scraping function, the
 
 The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
 * BHP data were standardised in terms of units. Some more recent cars were reported in units of PS - the German equivalent.
+
 * Dealer location and rating data were extracted from the associated dealer href.
+
 * Engine size was populated using RegEx - see figure 3 below. This was particularly problematic for electric vehicles as they don't have cylinders. in the engine and measure size in units of kilowatts instead of litres. An additional e_engine column was added to differentiate.
+
 * Number of doors was populated and standardised using RegEx. Interestingly pickup trucks describe doors in a different way to all other cars.
+
 * Added a used/new flag to allow for simple filtering.
+
 * Utilised GeoPy with the Google Maps API to obtain dealer county information. This involved moving from dealer location, which was often a city or an area, to dealer latitude and longitude before reverting back to dealder county.
 
 ```python3
@@ -142,7 +146,7 @@ A range of nine regression modelling methods were evaluated on a random subset o
 <p align="center" width="100%">
 <kbd><img src="images/modelsummary.png" width="500"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
+<p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
 <br>
 
 The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower, residual distribution.
@@ -240,6 +244,7 @@ Having satisfied both project objectives, there are a number of limitations to b
 In short, all project objectives have been met.
 
 * A predictive model has been generated which can predicted used car price with an R<sup>2</sup> score of 0.954. This model is built using a gradient boosting regressor from Scikit-learn and the ELI5 package has been used to illuminate how it operates 'under the hood' to better understand what generates value in the used car market.
+
 * Synthetic cars have been used to investigate the price influence of each car brand. The Dacia brand is confirmed to be cheaper than the Volvo brand. 
 
 One further implementation of the work within this project is that it could be used to predict the price depreciation of a car. This prediction over time would be subject to the same market conditions as discussed in the project limitations and may need to account for economic inflation but the conceptually it is possible. Figure 15 below illustrates an ambitious twenty year price prediction for my 2008 Volkswagen Polo, assuming a constant 7000 miles per year. Economic conditions have not been compensated in this prediction. 
@@ -312,12 +317,12 @@ For a fair comparison, three new models were generated using the same 319,663 ro
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/furthermodelsummary.png" width="500"  /></kbd>
+<kbd><img src="images/furthermodelsummary.png" width="550"  /></kbd>
 </p>
-<p align="center"><i><sub><b>Figure 18:</b> Summary of Gradient Boosting regression results whilst evaluating whether additional predictors can improve model performance. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Note that the thse models are generated from different input data to those of figue.</sub></i></p>
+<p align="center"><i><sub><b>Figure 18:</b> Summary of Gradient Boosting regression results whilst evaluating whether additional predictors can improve model performance. Results are sorted in ascending order by R<sup>2</sup> score on an unseen testing dataset. Note that the thse models are generated from different input data to those of figures 8 and 9.</sub></i></p>
 <br>
 
-Interpreting the model scoring metrics in figure 18, it is apparent that the county in which the used car is on sale does not materially affect the listing price. This goes against initial intuition, although one possible reason for this might be the recent introduction of the Ultra Low Emission Zone (ULEZ) in London, causing many households to offload their cars at a reduced price.
+Interpreting the model scoring metrics in figure 18, it is apparent that the county in which the used car is on sale does not materially affect the listing price. This goes against initial intuition. One possible reason for this might be the recent introduction of the Ultra Low Emission Zone (ULEZ) in London, causing many households to offload their cars at a reduced price.
 
 A more positive outcome of this further work is that adding the boot volume variable to the predictor set has caused the model R<sup>2</sup> score to rise from 0.954 to 0.968 on the unseen test data. 
 
@@ -332,6 +337,14 @@ This small improvement in model R<sup>2</sup> score yields a decrease in the RMS
 
 # Key Learnings and Challenges
 
-# Libraries Used
+This project allowed me to approach a number of different challenges.
+
+* In terms of time management it would have been easier to pick a capstone project with a ready-made dataset, however I did enjoy the challenge of scraping one for myself. I think that the size and the quality of the dataset gathered was influential in achieving good model performance. For example the model variance was reduced when incorporating all cars rather than the subset.
+
+* Although it hasn't been discussed much in this README, a simple linear regression can achieve an R<sup>2</sup> score of 0.88, which in some scenarios would be most satisfactory. Linear regression models are far easier to interpret than the tree based gradient boosting models and would have met the project primary objective. Through manipulating the ELI5 package to squeeze some interpretability out of the more accurate gradient boosting model I was able to have the best of both worlds. This is something that I will take with me to future projects.
+
+* I experienced great difficulty in generating the choropleth in figure 17. Different methods for reverse geocoding were trialed before eventually arriving with the Google Maps API. When finally a dealer county was available for all cars I found that my list of counties didn't corresponde directly with the [Tableau list of counties](https://www.theinformationlab.co.uk/2015/12/15/tableaus-uk-county-mapping-work/). After a time I worked out how to correct mismatches manually, but it was a slow and manual process.
 
 # Contact
+
+If you found this project interesting or would like reach out, you can find me on [LinkedIn](https://www.linkedin.com/in/rgdavies92/).
