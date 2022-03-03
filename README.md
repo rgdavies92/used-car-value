@@ -219,9 +219,13 @@ Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ss
 # Limitations
 
 Having satisfied both project objectives, there are a number of limitations to be aware of.
+
 * This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
+
 * The gathered data may go stale quickly. The background to this project<b>LINK</b> noted how different pressures are acting on the UK used car market in early 2022. If these conditions were to change and the market changed too then the base data for this project would become less appropriate. If this model is to be used to inform used car buying decisions then it is recommended to gather fresh data.
+
 * Numerous data entry errors have been identified throughout data cleaning, but only ones which could be identified as statistical anomalies. Non-remarkable data entry errors would harm the model but are difficult to identify. The gathered data is only as accurate as the used car dealers creating the car listings. 
+
 * Finally, 'car specification' is not captured well in the dataset. Each new car on sale comes with numerous optional extras in terms of 'trim' or performance which are certainly applicable to used cars too but not well captured by this model. In fact, the largest outliers in the final price residual distribution have been attributed to unusual or rare specifications. Figure 14 below shows the car listing for the largest outlier.
 
 <br>
@@ -251,16 +255,23 @@ One further implementation of the work within this project is that it could be u
 
 A number of interesting avenues have been identified for possible future work:
 
-* A deep learning modelling method may be able to improve the accuracy of price prediction.
-* The gradient boosting model may be enhanced through the introduction of additional predictors:
+* Experiment with other modelling algorithms
+  * A deep learning modelling method may be able to improve the accuracy of price prediction.
+
+* Try to improve the gradient boosting model through the introduction of additional predictors:
   * Would additional information on car boot size improve the model?
   * Would additional information about dealer location improve the model?
-* It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. This gauge is not available on every listing and would require a new web scrape, however it would pose an interesing classification problem. 
+
+* It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. 
+  * This gauge is not available on every listing and would require a new web scrape.
+  * It would pose an interesing classification problem although as with the regression problem, it would benefit from having sold price data available rather than listed price. 
+
 * Finally, since the project has some uself applications for people close to the used car market, it would be helpful to package the model and predictive/analytic functions in a neat way which allows a reader to interact. 
+
 
 In order to progress the project futher, some of the further work ideas have been addressed.
 
-# Further Work Attempted
+# Further Work Attempted - Additional Predictors
 
 ### Car Boot Volume Data
 
@@ -277,23 +288,47 @@ Although it can be explained quickly, gathering, cleaning and merging predictor 
 * Scrape dimensions and volumetric details for all cars on Carsized.com
 * Build and condition three variables on which to merge the Carsized data with AutoTrader data; year, body and car name. This involved some RegEx and translation from American english to UK english.
 * Use <i>ffill</i> and <i>bfill</i> to populate Carsized data for all years covered by the AutoTrader data. For example, the Volkswagen Polo dimensions from the 2005 model were replicated with <i>ffill</i> for all years up to 2014, when a newer model was released.
-  
+
+The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
 
 ### Dealer Location Data
 
 The GeoPy package and Google Maps API have been used to create a categorical predictor detailing the dealer county. The initial hunch was that used cars near London might cost more than those further away from London, and that including dealer location in predictors might improve model performance. 
 
-Although most car listings did have some degree of dealer location information, the format was highly incosistent; sometimes a town, sometimes a postcode, sometimes a county. In order to standardise this, reverse geocoding was performed to extract latitude and longitude for each car listing before obtaining the dealer county. 
+Although most car listings did have some degree of dealer location information, the format was highly incosistent; sometimes a town, sometimes a postcode, sometimes a county. In order to standardise this, reverse geocoding was performed to extract latitude and longitude for each car listing before obtaining the dealer county. Dealer county data were obtained for all 319,663 cars with boot size data.
 
 <br>
 <p align="center" width="100%">
-<kbd><img src="images/choropleth.png" width="450"  /></kbd>
+<kbd><img src="images/choropleth.png" width="400"  /></kbd>
 </p>
 <p align="center"><i><sub><b>Figure 17:</b> Choropleth of average used car price by UK county.</sub></i></p>
 <br>
 
+Figure 17 seems to disprove the original hunch that cars cost more near London. The most expensive county for average used car price is Mid Ulster, whilst the least expensive county is Anglesey. 
 
-The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
+### Modelling Impact
+
+For a fair comparison, three new models were generated using the same 319,663 rows of used car data and different sets of predictor variables; exisiting predictors, existing predictors plus boot size data and existing predictors plus dealer county data. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/furthermodelsummary.png" width="500"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 18:</b> Summary of Gradient Boosting regression results whilst evaluating whether additional predictors can improve model performance. Models are sorted from in ascending order by R<sup>2</sup> score on an unseen testing dataset. Note that the thse models are generated from different input data to those of figue.</sub></i></p>
+<br>
+
+Interpreting the model scoring metrics in figure 18, it is apparent that the county in which the used car is on sale does not materially affect the listing price. This goes against initial intuition, although one possible reason for this might be the recent introduction of the Ultra Low Emission Zone (ULEZ) in London, causing many households to offload their cars at a reduced price.
+
+A more positive outcome of this further work is that adding the boot volume variable to the predictor set has caused the model R<sup>2</sup> score to rise from 0.954 to 0.968 on the unseen test data. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/furthermodelscores.png" width="500"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 19:</b> Original model and updated model scoring metrics evaluated on the dataset of 319,663 complete cars.</sub></i></p>
+<br>
+
+This small improvement in model R<sup>2</sup> score yields a decrease in the RMSE metric of £400 or approximately 16%. If measured in terms of time invested, this further work falls squarley in the realm of diminising returns but the work has certainly been successful in improving the model performance. 
 
 # Key Learnings and Challenges
 
