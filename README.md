@@ -85,7 +85,8 @@ for index, car in ucars[ucars['engine'].isnull()].iterrows():
 <p align="center"><i><sub><b>Figure 3:</b> Sample data cleaning codeblock using RegEx to extract missing engine size data.</sub></i></p>
 <br>
 
-With all data cleaning and feature engineering finished, there were 400,247 new and used cars in the dataset. 378,597 of these were used cars, which this project focuses on. A [data dictionary file](data_dictionary.md) has been prepared to provide further detail. 
+With all data cleaning and feature engineering finished, there were 
+247 new and used cars in the dataset. 378,597 of these were used cars, which this project focuses on. A [data dictionary file](data_dictionary.md) has been prepared to provide further detail. 
 
 # Exploratory Data Analysis (EDA)
 
@@ -246,7 +247,7 @@ One further implementation of the work within this project is that it could be u
 <p align="center"><i><sub><b>Figure 15:</b> Future price prediction of 2008 Volkswagen Polo assuming 7000 miles each year. This plot assumes that economic conditions are constant over time. </sub></i></p>
 <br>
 
-# Further Work
+# Identifying Further Work
 
 A number of interesting avenues have been identified for possible future work:
 
@@ -255,15 +256,44 @@ A number of interesting avenues have been identified for possible future work:
   * Would additional information on car boot size improve the model?
   * Would additional information about dealer location improve the model?
 * It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. This gauge is not available on every listing and would require a new web scrape, however it would pose an interesing classification problem. 
+* Finally, since the project has some uself applications for people close to the used car market, it would be helpful to package the model and predictive/analytic functions in a neat way which allows a reader to interact. 
 
-In order to progress the project futher, some of the further work ideas have been addressed below.
+In order to progress the project futher, some of the further work ideas have been addressed.
 
-## Car Boot Volume Data
+# Further Work Attempted
 
-<img align="left" src=images/carsized.png>[Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car. 
- 
+### Car Boot Volume Data
 
-## Dealer Location Data
+[Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car.
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/carsized.png" width="450"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 16:</b> Carsized.com was selected as the source of additional predictor information for the model. </sub></i></p>
+<br>
+
+Although it can be explained quickly, gathering, cleaning and merging predictor variables from an additional data source was a time consuming process. The steps taken were:
+* Scrape dimensions and volumetric details for all cars on Carsized.com
+* Build and condition three variables on which to merge the Carsized data with AutoTrader data; year, body and car name. This involved some RegEx and translation from American english to UK english.
+* Use <i>ffill</i> and <i>bfill</i> to populate Carsized data for all years covered by the AutoTrader data. For example, the Volkswagen Polo dimensions from the 2005 model were replicated with <i>ffill</i> for all years up to 2014, when a newer model was released.
+  
+
+### Dealer Location Data
+
+The GeoPy package and Google Maps API have been used to create a categorical predictor detailing the dealer county. The initial hunch was that used cars near London might cost more than those further away from London, and that including dealer location in predictors might improve model performance. 
+
+Although most car listings did have some degree of dealer location information, the format was highly incosistent; sometimes a town, sometimes a postcode, sometimes a county. In order to standardise this, reverse geocoding was performed to extract latitude and longitude for each car listing before obtaining the dealer county. 
+
+<br>
+<p align="center" width="100%">
+<kbd><img src="images/choropleth.png" width="450"  /></kbd>
+</p>
+<p align="center"><i><sub><b>Figure 17:</b> Choropleth of average used car price by UK county.</sub></i></p>
+<br>
+
+
+The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
 
 # Key Learnings and Challenges
 
