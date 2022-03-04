@@ -240,7 +240,7 @@ To verify this hypothetsis, a series of synthetics used cars were generated with
 <p align="center"><i><sub><b>Figure 13:</b> Synthetic car value plot where all attributes are constant but car brand. YEar was fixed at 2018, mileage was fixed at 30000 and BHP was fixed at 100. Volvo and Dacia brands associated with the hypothesis have been coloured red.</sub></i></p>
 <br>
 
-Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ssangyong is the least expensive car brand modelled. It also confirms the hypothesis that a Dacia branded car is indeed cheaper than a Volvo branded car. A Dacia is the third cheapest brand of the used cars modelled in this project. The hypothesis has been validated as true and the <b>LINK TO TOP</B> secondary project objective has been satisfied. 
+Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ssangyong is the least expensive car brand modelled. It also confirms the hypothesis that a Dacia branded car is indeed cheaper than a Volvo branded car. A Dacia is the third cheapest brand of the used cars modelled in this project. The hypothesis has been validated as true and the [secondary project objective](#objectives) has been satisfied. 
 
 # Limitations
 
@@ -248,7 +248,7 @@ Having satisfied both project objectives, there are a number of limitations to b
 
 * This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
 
-* The gathered data may go stale quickly. The background to this project<b>LINK</b> noted how different pressures are acting on the UK used car market in early 2022. If these conditions were to change and the market changed too then the base data for this project would become less appropriate. If this model is to be used to inform used car buying decisions then it is recommended to gather fresh data.
+* The gathered data may go stale quickly. The [background](#background-and-problem-statement) to this project noted how different pressures are acting on the UK used car market in early 2022. If these conditions were to change and the market changed too then the base data for this project would become less appropriate. If this model is to be used to inform used car buying decisions then it is recommended to gather fresh data.
 
 * Numerous data entry errors have been identified throughout data cleaning, but only ones which could be identified as statistical anomalies. Non-remarkable data entry errors would harm the model but are difficult to identify. The gathered data is only as accurate as the used car dealers creating the car listings. 
 
