@@ -225,7 +225,7 @@ To combat the identified shotcomings of feature importance the Explain it Like I
 
 The green and red box at the top is a raw output from ELI5's <i>show_weights</i> function, with positive predictors in green and negative predictors in red. Notice how despite this car being Ford, the fact that this car is also not a Land Rover has an impact on the predicted price. It is relationships like this which have been collapsed into a single accumulated price impact in the central table. As this feature is particularly useful, there are more examples of used car value breakdowns to be found in <b>THE LINKED NON-TECHNICAL PRESENTAION</b>.
 
-With the ELI5 analysis of the final model in place, the inner workings of the model have become suitably explainable and transparent. The <b>LINK TO TOP</B> primary objective has been satisfied.
+With the ELI5 analysis of the final model in place, the inner workings of the model have become suitably explainable and transparent. The [primary objective](#objectives) has been satisfied.
 
 # Validating the Hypothesis
 
