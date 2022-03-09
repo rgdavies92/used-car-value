@@ -214,7 +214,7 @@ A downside to the feature importance measured above in figure 11 is that it does
 
 ## Permutation Importance with ELI5 and Used Car Value Breakdown
 
-To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will remove one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After the permutation importance has been obtained, ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative. Figure 12 below steps through the way in which ELI5 has been used to generate a used car value breakdown. 
+To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will shuffle (i.e. remove the information) one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After the permutation importance has been obtained, ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative. Figure 12 below steps through the way in which ELI5 has been used to generate a used car value breakdown. 
 
 <br>
 <p align="center" width="100%">
