@@ -80,6 +80,8 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center"><i><sub><b>Figure 2:</b> Non-exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
+Data acquisiton from autotrader.co.uk has been documented in greater detail in [Notebook 00_AutoTrader_scrape.ipynb.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
+
 # Data Cleaning and Feature Engineering
 
 The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are available in the [04_Data_Cleaning_and_EDA notebook](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb), with some of the more interesting parts summarised below:
@@ -242,6 +244,8 @@ To verify this hypothesis, a series of synthetics used cars were generated with 
 
 Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ssangyong is the least expensive car brand modelled. It also confirms the hypothesis that a Dacia branded car is indeed cheaper than a Volvo branded car. A Dacia is the third cheapest brand of the used cars modelled in this project. The hypothesis has been validated as true and the [secondary project objective](#objectives) has been satisfied. 
 
+The full modelling workflow from model selection on a subset of the data to model interpretation with ELI5 is documented in [Notebook 05_Modelling_version1.](https://github.com/rgdavies92/used-car-value/blob/main/05_Modelling_version1.ipynb)
+
 # Limitations
 
 Having satisfied both project objectives, there are a number of limitations to be aware of.
@@ -302,7 +306,7 @@ In order to progress the project futher, some of the further work ideas have bee
 
 ## Car Boot Volume Data
 
-[Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car.
+[Carsized.com](https://www.carsized.com/en/) has been scraped for car dimensions for over 1000 different models of cars to help investigate whether car boot size influences the price of a used car. 
 
 <br>
 <p align="center" width="100%">
@@ -318,6 +322,8 @@ Although it can be explained quickly, gathering, cleaning and merging predictor 
 
 The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
 
+Scraping carsized.com is documented in [Notebook 02_Carsized_scrape](https://github.com/rgdavies92/used-car-value/blob/main/02_Carsized_scrape.ipynb) with the merging in [Notebook 04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
+
 ## Dealer Location Data
 
 The GeoPy package and Google Maps API have been used to create a categorical predictor detailing the dealer county. The initial hunch was that used cars near London might cost more than those further away from London, and that including dealer location in predictors might improve model performance. 
@@ -332,6 +338,8 @@ Although most car listings did have some degree of dealer location information, 
 <br>
 
 Figure 17 seems to disprove the original hunch that cars cost more near London. The most expensive county for average used car price is Mid Ulster, whilst the least expensive county is Anglesey. 
+
+GeoCoding with Google API is documented in [Notebook 03_GeoCoding](https://github.com/rgdavies92/used-car-value/blob/main/03_GeoCoding.ipynb) with the merging in [Notebook 04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
 
 ## Modelling Impact
 
@@ -356,6 +364,8 @@ A more positive outcome of this further work is that adding the boot volume vari
 <br>
 
 This small improvement in model R<sup>2</sup> score yields a decrease in the RMSE metric of £400 or approximately 16%. If measured in terms of time invested, this further work falls squarely in the realm of diminishing returns but the work has certainly been successful in improving the model performance. 
+
+The further modelling work undertaken with dealer county and boot size predictors is documented in [Notebook 06_Modelling_version2.]_(https://github.com/rgdavies92/used-car-value/blob/main/06_Modelling_version2.ipynb)
 
 # Key Learnings and Challenges
 
