@@ -80,11 +80,11 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center"><i><sub><b>Figure 2:</b> Non-exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
-Data acquisiton from autotrader.co.uk has been documented in greater detail in [Notebook 00_AutoTrader_scrape.ipynb.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
+Data acquisiton from autotrader.co.uk has been documented in greater detail in notebook [00_AutoTrader_scrape.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
 
 # Data Cleaning and Feature Engineering
 
-The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are available in the [04_Data_Cleaning_and_EDA notebook](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb), with some of the more interesting parts summarised below:
+The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are available in the [04_Data_Cleaning_and_EDA](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb) notebook, with some of the more interesting parts summarised below:
 * BHP data were standardised in terms of units. Some more recent cars were reported in units of PS - the German equivalent.
 
 * Dealer location and rating data were extracted from the associated dealer href.
@@ -120,7 +120,7 @@ With all data cleaning and feature engineering finished, there were
 
 Although this is a used car project, data have been scraped and cleaned for both new and used cars. It was at this point, at the beginning of the EDA, that new cars were dropped to focus on used cars only. 
 
-There were no immediate surprises in the EDA. The dataset was scrutinised from a number of different angles to check for patterns and trends. Some of the more descriptive relationships within the dataset are captured in figures 4-7 below, with a more comprehensive EDA to be found in the [04_Data_Cleaning_and_EDA notebook](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb).
+There were no immediate surprises in the EDA. The dataset was scrutinised from a number of different angles to check for patterns and trends. Some of the more descriptive relationships within the dataset are captured in figures 4-7 below, with a more comprehensive EDA to be found in the [04_Data_Cleaning_and_EDA](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb) notebook.
 
 <br>
 <p align="center" width="100%">
@@ -164,7 +164,7 @@ For car listing features which were used in the following modelling process, ref
 
 ## Selecting a Model
 
-A range of nine regression modelling methods were evaluated on a random subset of 50,000 in order to provide a quick evaluation of model suitability. The data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-validation was employed on the training dataset to reduce overfitting. Parameters for each model were optimised via method specific grid searching. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
+A range of nine regression modelling methods were evaluated on a random subset of 50,000 in order to provide a quick evaluation of model suitability. The data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-validation was employed on the training dataset to reduce overfitting. Parameters for each model were optimised via method specific grid searching. An overview of the tested models can be found on slide 6 <b>X OF THE LINKED PPT</b>of the non-technical presentation or specific details can be found in section 3 of notebook [05_Modelling_version1](https://github.com/rgdavies92/used-car-value/blob/main/05_Modelling_version1.ipynb). For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
 
 <br>
 <p align="center" width="100%">
@@ -244,7 +244,7 @@ To verify this hypothesis, a series of synthetics used cars were generated with 
 
 Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ssangyong is the least expensive car brand modelled. It also confirms the hypothesis that a Dacia branded car is indeed cheaper than a Volvo branded car. A Dacia is the third cheapest brand of the used cars modelled in this project. The hypothesis has been validated as true and the [secondary project objective](#objectives) has been satisfied. 
 
-The full modelling workflow from model selection on a subset of the data to model interpretation with ELI5 is documented in [Notebook 05_Modelling_version1.](https://github.com/rgdavies92/used-car-value/blob/main/05_Modelling_version1.ipynb)
+The full modelling workflow from model selection on a subset of the data to model interpretation with ELI5 is documented in notebook [05_Modelling_version1.](https://github.com/rgdavies92/used-car-value/blob/main/05_Modelling_version1.ipynb)
 
 # Limitations
 
@@ -322,7 +322,7 @@ Although it can be explained quickly, gathering, cleaning and merging predictor 
 
 The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
 
-Scraping carsized.com is documented in [Notebook 02_Carsized_scrape](https://github.com/rgdavies92/used-car-value/blob/main/02_Carsized_scrape.ipynb) with the merging in [Notebook 04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
+Scraping carsized.com is documented in notebook [02_Carsized_scrape](https://github.com/rgdavies92/used-car-value/blob/main/02_Carsized_scrape.ipynb) with the merging in notebook [04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
 
 ## Dealer Location Data
 
@@ -339,7 +339,7 @@ Although most car listings did have some degree of dealer location information, 
 
 Figure 17 seems to disprove the original hunch that cars cost more near London. The most expensive county for average used car price is Mid Ulster, whilst the least expensive county is Anglesey. 
 
-GeoCoding with Google API is documented in [Notebook 03_GeoCoding](https://github.com/rgdavies92/used-car-value/blob/main/03_GeoCoding.ipynb) with the merging in [Notebook 04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
+GeoCoding with Google API is documented in notebook [03_GeoCoding](https://github.com/rgdavies92/used-car-value/blob/main/03_GeoCoding.ipynb) with the merging in notebook [04_Data_cleaning_and_EDA.](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb)
 
 ## Modelling Impact
 
@@ -365,7 +365,7 @@ A more positive outcome of this further work is that adding the boot volume vari
 
 This small improvement in model R<sup>2</sup> score yields a decrease in the RMSE metric of £400 or approximately 16%. If measured in terms of time invested, this further work falls squarely in the realm of diminishing returns but the work has certainly been successful in improving the model performance. 
 
-The further modelling work undertaken with dealer county and boot size predictors is documented in [Notebook 06_Modelling_version2.]_(https://github.com/rgdavies92/used-car-value/blob/main/06_Modelling_version2.ipynb)
+The further modelling work undertaken with dealer county and boot size predictors is documented in notebook [06_Modelling_version2.](https://github.com/rgdavies92/used-car-value/blob/main/06_Modelling_version2.ipynb)
 
 # Key Learnings and Challenges
 
