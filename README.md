@@ -80,7 +80,7 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center"><i><sub><b>Figure 2:</b> Non-exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
-Data acquisiton from autotrader.co.uk has been documented in greater detail in notebook [00_AutoTrader_scrape.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
+Data acquisition from autotrader.co.uk has been documented in greater detail in notebook [00_AutoTrader_scrape.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
 
 # Data Cleaning and Feature Engineering
 
@@ -95,7 +95,7 @@ The AutoTrader dataset has been gathered from car listings which are posted by t
 
 * Added a used/new flag to allow for simple filtering.
 
-* Utilised GeoPy with the Google Maps API to obtain dealer county information. This involved moving from dealer location, which was often a city or an area, to dealer latitude and longitude before reverting back to dealder county.
+* Utilised GeoPy with the Google Maps API to obtain dealer county information. This involved moving from dealer location, which was often a city or an area, to dealer latitude and longitude before reverting back to dealer county.
 
 ```python3
 # Iterate over missing engine rows and use RegEx on name_subtitle to extract engine 
@@ -156,7 +156,7 @@ The average used car value plot by year produced points out an interesting non-l
 <p align="center"><i><sub><b>Figure 7:</b> Plot describes price distribution by car transmission on the left and by car drivetrain on the right.</sub></i></p>
 <br>
 
-Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determining used car value. Manual transmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may because rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
+Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determining used car value. Manual transmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly, rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may be because rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
 
 # Modelling
 
@@ -173,7 +173,7 @@ A range of nine regression modelling methods were evaluated on a random subset o
 <p align="center"><i><sub><b>Figure 8:</b> Summary plot of tested models. Models are sorted in ascending order by R<sup>2</sup> score on an unseen testing dataset. Machine learning methods tested came from the Scikit-Learn and XGBoost packages. </sub></i></p>
 <br>
 
-The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based in decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower, residual distribution.
+The top four models in figure 8 are based around linear regression and yield the least impressive scores. This is likely due to some violations of the linear regression assumptions. The final five models are based on decision trees, with the final four models employing either bagging or boosting to enhance predictions. Improvements in R<sup>2</sup> score from top to bottom are reflected in the shape of residual distribution for each method - a high R<sup>2</sup> score yields a taller, narrower, residual distribution.
 
 Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegressor() on the test dataset, the GradientBoostingRegressor() model was evidenced to contain less variance.
 
@@ -379,4 +379,4 @@ This project allowed me to approach a number of different challenges.
 
 # Contact
 
-If you found this project interesting or would like reach out, you can find me on [LinkedIn](https://www.linkedin.com/in/rgdavies92/).
+If you found this project interesting or would like to reach out, you can find me on [LinkedIn](https://www.linkedin.com/in/rgdavies92/).
