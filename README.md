@@ -69,7 +69,7 @@ Two problems overcome during web scraping:
 
 * Problem 1 involved a hard limit on the search results. Search results were limited to 1000 car listings per search. This is not a problem if the search criteria are highly specific as the platform would expect, although for this project it was important to return all car listings. To navigate this problem, thousands of complimentary searches were performed and the number of returned results were verified to be less than 1000 before continuing to scrape the data.
 
-* The solution to problem 1 likely contributed to problem 2; the searching behaviour was being flagged as problematic by the website. AutoTrader employ Cloudflare website security to prevent algorithms like this overloading their server with requests. The security successfuly prevented the Python Requests package from gaining access to search results, however switching to Cloudscraper instead resolved all issues. 
+* The solution to problem 1 likely contributed to problem 2; the searching behaviour was being flagged as problematic by the website. AutoTrader employ Cloudflare website security to prevent algorithms like this overloading their server with requests. The security successfully prevented the Python Requests package from gaining access to search results, however switching to Cloudscraper instead resolved all issues. 
 
 After a small number of iterative improvements to the web scraping function, the dataset was scraped in four days in the week commencing 31/01/2022. This is the date at which data are accurate.
 
@@ -82,7 +82,7 @@ After a small number of iterative improvements to the web scraping function, the
 
 # Data Cleaning and Feature Engineering
 
-The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are availble in the <b>LINKED JUPYTER NOTEBOOK</b>, with some of the more interesting parts summarised below:
+The AutoTrader dataset has been gathered from car listings which are posted by thousands of dealers across the UK. As such, the car listings can be a little variable in terms of content and quality. Full details on the data cleaning performed in this project are available in the [04_Data_Cleaning_and_EDA notebook](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb), with some of the more interesting parts summarised below:
 * BHP data were standardised in terms of units. Some more recent cars were reported in units of PS - the German equivalent.
 
 * Dealer location and rating data were extracted from the associated dealer href.
@@ -116,9 +116,9 @@ With all data cleaning and feature engineering finished, there were
 
 # Exploratory Data Analysis (EDA)
 
-Although this is a used car project, data have been scraped and cleaned for both new and used cars. It was at this point, the beginning of the EDA that new cars were dropped to focus on used cars only. 
+Although this is a used car project, data have been scraped and cleaned for both new and used cars. It was at this point, at the beginning of the EDA, that new cars were dropped to focus on used cars only. 
 
-There were no immediate surprises in the EDA. The dataset was scruitinised from a number of different angles to check for patterns and trends. Some of the more descriptive relatonships within the dataset are captured in figures 4-7 below, with a more comprehensive EDA to be found in the <b>LINKED JUPYTER NOTEBOOK</b>.
+There were no immediate surprises in the EDA. The dataset was scrutinised from a number of different angles to check for patterns and trends. Some of the more descriptive relationships within the dataset are captured in figures 4-7 below, with a more comprehensive EDA to be found in the [04_Data_Cleaning_and_EDA notebook](https://github.com/rgdavies92/used-car-value/blob/main/04_Data_cleaning_and_EDA.ipynb).
 
 <br>
 <p align="center" width="100%">
@@ -145,7 +145,7 @@ Figure 5 tells many stories about the price distribution of the different car br
 <p align="center"><i><sub><b>Figure 6:</b> Plot describes the average used car price by year produced. Black confidence bounds at the top of each bar can be seen to grow wider as cars grow older due to a reduced number of cars for sale from each year. The same effect can be seen for used cars from 2022.</sub></i></p>
 <br>
 
-The average used car value plot by year produced points out an interesting non-linear relationship between used car price and age. Average used car price seems to fall from 2022 produced cars to 2003 produced cars at which point it begins to rise slightly. This may be due to the influence of some sort of unexplained vintage-factor. The fact that this relationship is not perfeclty linear may have implications for linear models, to be broached in the modelling section. 
+The average used car value plot by year produced points out an interesting non-linear relationship between used car price and age. Average used car price seems to fall from 2022 produced cars to 2003 produced cars at which point it begins to rise slightly. This may be due to the influence of some sort of unexplained vintage-factor. The fact that this relationship is not perfectly linear may have implications for linear models, to be broached in the modelling section. 
 
 <br>
 <p align="center" width="100%">
@@ -154,7 +154,7 @@ The average used car value plot by year produced points out an interesting non-l
 <p align="center"><i><sub><b>Figure 7:</b> Plot describes price distribution by car transmission on the left and by car drivetrain on the right.</sub></i></p>
 <br>
 
-Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determinining used car value. Manual trasmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may becasue rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
+Figure 7 is the final plot in this EDA section and images the used car price distribution when divided by two of the categorical variables; drivetrain and transmission. Early indications show that categorical variables such as these should be valuable in determining used car value. Manual transmission cars are generally cheaper than automatic transmission cars and four-wheel-drive cars are generally more expensive than front-wheel-drive cars. Interestingly rear-wheel-drive cars seem to be more expensive than front-wheel-drive cars. This may because rear-wheel-drive cars in the UK are predominantly BMW or Mercedes-Benz, which have been identified as more expensive in figure 5. 
 
 # Modelling
 
@@ -162,7 +162,7 @@ For car listing features which were used in the following modelling process, ref
 
 ## Selecting a Model
 
-A range of nine regression modelling methods were evaluated on a random subset of 50,000 in order to provide a quick evaluation of model suitability. The data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-valiation was employed on the training dataset to reduce overfitting. Parameters for each model were optimised via method specific grid searching. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
+A range of nine regression modelling methods were evaluated on a random subset of 50,000 in order to provide a quick evaluation of model suitability. The data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-validation was employed on the training dataset to reduce overfitting. Parameters for each model were optimised via method specific grid searching. An overview of the tested models can be found on slide 6 of the non-technical presentation or specific details can be found in section <b>X OF THE LINKED JUPYTER NOTEBOOK</b>. For this summary, the range of R<sup>2</sup> scores and corresponding price residual distributions are presented for each of the tested models in figure 8 below. 
 
 <br>
 <p align="center" width="100%">
@@ -177,7 +177,7 @@ Although the XGBoostRegressor() marginally outperformed the GradientBoostingRegr
 
 ## The Final Model
 
-A Gradient Boosting Regressor model from the Scikit-learn package was selected as the optimal model to procede with on the full dataset; this is one of the decision tree based methods. As before, the data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-valiation was employed on the training dataset to reduce overfitting. Increasing the number of cars from 50,000 to 378,597 served to both increase model run-times and further reduce model variance.
+A Gradient Boosting Regressor model from the Scikit-learn package was selected as the optimal model to proceed with on the full dataset; this is one of the decision tree based methods. As before, the data were train-test split in an 80:20 ratio to enable evaluation on unseen data and five fold cross-validation was employed on the training dataset to reduce overfitting. Increasing the number of cars from 50,000 to 378,597 served to both increase model run-times and further reduce model variance.
 
 <br>
 <p align="center" width="100%">
@@ -186,7 +186,7 @@ A Gradient Boosting Regressor model from the Scikit-learn package was selected a
 <p align="center"><i><sub><b>Figure 9:</b> Optimal model scoring metrics evaluated on the test and train datasets. </sub></i></p>
 <br>
 
-The final model can be seen to explain 95% of the variance in used car price within the dataset that is not explained by the baseline (average) model. RMSE for the final model is approximately £2500 - note that this model scoring metric is weighted towards the larger errros. 
+The final model can be seen to explain 95% of the variance in used car price within the dataset that is not explained by the baseline (average) model. RMSE for the final model is approximately £2500 - note that this model scoring metric is weighted towards the larger errors. 
 
 <br>
 <p align="center" width="100%">
@@ -201,7 +201,7 @@ On the trade-off cross-plot of accuracy against interpretability, Gradient Boost
 
 ## Feature Importance
 
-Scikit-learn can quickly produce the feature importance, or gini importance associated with the model. This is defined to be the normalised total-reduction of the criterion by each feature, or more simiply this could be interpreted as 'how helpful each of the predictors were in define tree branches within the model'. 
+Scikit-learn can quickly produce the feature importance, or gini importance associated with the model. This is defined to be the normalised total-reduction of the criterion by each feature, or more simply this could be interpreted as 'how helpful each of the predictors were in defining tree branches within the model'. 
 
 <br>
 <p align="center" width="100%">
@@ -210,11 +210,11 @@ Scikit-learn can quickly produce the feature importance, or gini importance asso
 <p align="center"><i><sub><b>Figure 11:</b> Feature importances or Gini importances attributed to the top 10 most influential predictors within the Gradient Boosting model. </sub></i></p>
 <br>
 
-A downside to the feature importance measured above in figure 11 is that it does not capture the nature of the relationship between each of the predictors and the target, i.e. whether it a positive or negative predictor. For example, based on the distribution in figure 7 it is observe that a front-wheel-drive used car is generally cheaper or below average price, however the feature importance only informs that it is the 8th most important feature in determining used car price. This form of feature importance does not satisfy the initial objective that any produced model must be interpretable to identify value.
+A downside to the feature importance measured above in figure 11 is that it does not capture the nature of the relationship between each of the predictors and the target, i.e. whether it is a positive or negative predictor. For example, based on the distribution in figure 7 it is observed that a front-wheel-drive used car is generally cheaper or below average price, however the feature importance only informs that it is the 8th most important feature in determining used car price. This form of feature importance does not satisfy the initial objective that any produced model must be interpretable to identify value.
 
 ## Permutation Importance with ELI5 and Used Car Value Breakdown
 
-To combat the identified shotcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will shuffle (i.e. remove the information) one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After the permutation importance has been obtained, ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative. Figure 12 below steps through the way in which ELI5 has been used to generate a used car value breakdown. 
+To combat the identified shortcomings of feature importance the Explain it Like I'm 5 (ELI5) package has been utilised to calculate permutation importance. ELI5 will shuffle (i.e. remove the information) one predictor at a time from the predictor set and measure how model scoring suffers. The associated weight is then ascribed to each of the predictors. After the permutation importance has been obtained, ELI5 can be further used to provide granular detail on how each predictor variable impacts the model prediction for a given used car, and importantly whether the nature of that relationship is positive or negative. Figure 12 below steps through the way in which ELI5 has been used to generate a used car value breakdown. 
 
 <br>
 <p align="center" width="100%">
@@ -231,7 +231,7 @@ With the ELI5 analysis of the final model in place, the inner workings of the mo
 
 With the model finalised it was then possible to test the hypothesis; <i>is a Dacia cheaper than a Volvo?</i>
 
-To verify this hypothetsis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs plotted below in figure 13. 
+To verify this hypothesis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs plotted below in figure 13. 
 
 <br>
 <p align="center" width="100%">
@@ -246,7 +246,7 @@ Figure 13 illustrates that Tesla is the most expensive car brand modelled and Ss
 
 Having satisfied both project objectives, there are a number of limitations to be aware of.
 
-* This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
+* This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if it has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
 
 * The gathered data may go stale quickly. The [background](#background-and-problem-statement) to this project noted how different pressures are acting on the UK used car market in early 2022. If these conditions were to change and the market changed too then the base data for this project would become less appropriate. If this model is to be used to inform used car buying decisions then it is recommended to gather fresh data.
 
@@ -265,11 +265,11 @@ Having satisfied both project objectives, there are a number of limitations to b
 
 In short, all project objectives have been met.
 
-* A predictive model has been generated which can predicted used car price with an R<sup>2</sup> score of 0.954. This model is built using a gradient boosting regressor from Scikit-learn and the ELI5 package has been used to illuminate how it operates 'under the hood' to better understand what generates value in the used car market.
+* A predictive model has been generated which can predict used car price with an R<sup>2</sup> score of 0.954. This model is built using a gradient boosting regressor from Scikit-learn and the ELI5 package has been used to illuminate how it operates 'under the hood' to better understand what generates value in the used car market.
 
 * Synthetic cars have been used to investigate the price influence of each car brand. The Dacia brand is confirmed to be cheaper than the Volvo brand. 
 
-One further implementation of the work within this project is that it could be used to predict the price depreciation of a car. This prediction over time would be subject to the same market conditions as discussed in the project limitations and may need to account for economic inflation but the conceptually it is possible. Figure 15 below illustrates an ambitious twenty year price prediction for my 2008 Volkswagen Polo, assuming a constant 7000 miles per year. Economic conditions have not been compensated in this prediction. 
+One further implementation of the work within this project is that it could be used to predict the price depreciation of a car. This prediction over time would be subject to the same market conditions as discussed in the project limitations and may need to account for economic inflation but conceptually it is possible. Figure 15 below illustrates an ambitious twenty year price prediction for my 2008 Volkswagen Polo, assuming a constant 7000 miles per year. Economic conditions have not been compensated for in this prediction. 
 
 <br>
 <p align="center" width="100%">
@@ -291,9 +291,9 @@ A number of interesting avenues have been identified for possible future work:
 
 * It would be interesting to benchmark the used car price prediction from this model against AutoTrader's own valuge gauge. 
   * This gauge is not available on every listing and would require a new web scrape.
-  * It would pose an interesing classification problem although as with the regression problem, it would benefit from having sold price data available rather than listed price. 
+  * It would pose an interesting classification problem although as with the regression problem, it would benefit from having sold price data available rather than listed price. 
 
-* Finally, since the project has some uself applications for people close to the used car market, it would be helpful to package the model and predictive/analytic functions in a neat way which allows a reader to interact. 
+* Finally, since the project has some useful applications for people close to the used car market, it would be helpful to package the model and predictive/analytic functions in a neat way which allows a reader to interact. 
 
 
 In order to progress the project futher, some of the further work ideas have been addressed.
@@ -313,7 +313,7 @@ In order to progress the project futher, some of the further work ideas have bee
 
 Although it can be explained quickly, gathering, cleaning and merging predictor variables from an additional data source was a time consuming process. The steps taken were:
 * Scrape dimensions and volumetric details for all cars on Carsized.com
-* Build and condition three variables on which to merge the Carsized data with AutoTrader data; year, body and car name. This involved some RegEx and translation from American english to UK english.
+* Build and condition three variables on which to merge the Carsized data with AutoTrader data; year, body and car name. This involved some RegEx and translation from American English to UK English.
 * Use <i>ffill</i> and <i>bfill</i> to populate Carsized data for all years covered by the AutoTrader data. For example, the Volkswagen Polo dimensions from the 2005 model were replicated with <i>ffill</i> for all years up to 2014, when a newer model was released.
 
 The additional car boot size data were merged with the existing AutoTrader data with non-matched cars dropped. This left 319,663 complete used cars entries for this additional modelling. 
@@ -322,7 +322,7 @@ The additional car boot size data were merged with the existing AutoTrader data 
 
 The GeoPy package and Google Maps API have been used to create a categorical predictor detailing the dealer county. The initial hunch was that used cars near London might cost more than those further away from London, and that including dealer location in predictors might improve model performance. 
 
-Although most car listings did have some degree of dealer location information, the format was highly incosistent; sometimes a town, sometimes a postcode, sometimes a county. In order to standardise this, reverse geocoding was performed to extract latitude and longitude for each car listing before obtaining the dealer county. Dealer county data were obtained for all 319,663 cars with boot size data.
+Although most car listings did have some degree of dealer location information, the format was highly inconsistent; sometimes a town, sometimes a postcode, sometimes a county. In order to standardise this, reverse geocoding was performed to extract latitude and longitude for each car listing before obtaining the dealer county. Dealer county data were obtained for all 319,663 cars with boot size data.
 
 <br>
 <p align="center" width="100%">
@@ -335,7 +335,7 @@ Figure 17 seems to disprove the original hunch that cars cost more near London. 
 
 ## Modelling Impact
 
-For a fair comparison, three new models were generated using the same 319,663 rows of used car data and different sets of predictor variables; exisiting predictors, existing predictors plus boot size data and existing predictors plus dealer county data. 
+For a fair comparison, three new models were generated using the same 319,663 rows of used car data and different sets of predictor variables; existing predictors, existing predictors plus boot size data and existing predictors plus dealer county data. 
 
 <br>
 <p align="center" width="100%">
@@ -355,7 +355,7 @@ A more positive outcome of this further work is that adding the boot volume vari
 <p align="center"><i><sub><b>Figure 19:</b> Original model and updated model scoring metrics evaluated on the dataset of 319,663 complete cars.</sub></i></p>
 <br>
 
-This small improvement in model R<sup>2</sup> score yields a decrease in the RMSE metric of £400 or approximately 16%. If measured in terms of time invested, this further work falls squarley in the realm of diminising returns but the work has certainly been successful in improving the model performance. 
+This small improvement in model R<sup>2</sup> score yields a decrease in the RMSE metric of £400 or approximately 16%. If measured in terms of time invested, this further work falls squarely in the realm of diminishing returns but the work has certainly been successful in improving the model performance. 
 
 # Key Learnings and Challenges
 
@@ -365,7 +365,7 @@ This project allowed me to approach a number of different challenges.
 
 * Although it hasn't been discussed much in this README, a simple linear regression can achieve an R<sup>2</sup> score of 0.88, which in some scenarios would be most satisfactory. Linear regression models are far easier to interpret than the tree based gradient boosting models and would have met the project primary objective. Through manipulating the ELI5 package to squeeze some interpretability out of the more accurate gradient boosting model I was able to have the best of both worlds. This is something that I will take with me to future projects.
 
-* I experienced great difficulty in generating the choropleth in figure 17. Different methods for reverse geocoding were trialed before eventually arriving with the Google Maps API. When finally a dealer county was available for all cars I found that my list of counties didn't corresponde directly with the [Tableau list of counties](https://www.theinformationlab.co.uk/2015/12/15/tableaus-uk-county-mapping-work/). After a time I worked out how to correct mismatches manually, but it was a slow and manual process.
+* I experienced great difficulty in generating the choropleth in figure 17. Different methods for reverse geocoding were trialled before eventually arriving with the Google Maps API. When finally a dealer county was available for all cars I found that my list of counties didn't correspond directly with the [Tableau list of counties](https://www.theinformationlab.co.uk/2015/12/15/tableaus-uk-county-mapping-work/). After a time I worked out how to correct mismatches manually, but it was a slow and manual process.
 
 # Contact
 
