@@ -80,7 +80,7 @@ After a small number of iterative improvements to the web scraping function, the
 <p align="center"><i><sub><b>Figure 2:</b> Non-exhaustive list of the data points scraped for each car listing. Not all data points persisted into the final model, but that wasn't to be known at this stage.</sub></i></p>
 <br>
 
-Data acquisition from autotrader.co.uk has been documented in greater detail in notebook [00_AutoTrader_scrape.](https://github.com/rgdavies92/used-car-value/blob/main/00_AutoTrader_scrape.ipynb)
+Data acquisition from autotrader.co.uk has been documented in greater detail in notebook [00_AutoTrader_scrape.](https://github.com/rgdavies92/used-car-value/blob/main/01_AutoTrader_scrape.ipynb)
 
 # Data Cleaning and Feature Engineering
 
