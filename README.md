@@ -248,7 +248,7 @@ The full modelling workflow from model selection on a subset of the data to mode
 
 # Limitations
 
-Having satisfied both project objectives, there are a number of limitations to be aware of.
+Having satisfied both project objectives, there are a number of limitations to be aware of:
 
 * This project relies on the assumption that the listed cars are sold at the advertised price at the time of web scraping. It is common practice to reduce the price of a car if it has not been able to sell, but that would be missed by the dataset. To navigate this problem data would need to be obtained with <i>sold price</i> rather than the <i>advertised price</i> which this project is based on. This would likely require access to the commercial AutoTrader API.
 
@@ -300,7 +300,7 @@ A number of interesting avenues have been identified for possible future work:
 * Finally, since the project has some useful applications for people close to the used car market, it would be helpful to package the model and predictive/analytic functions in a neat way which allows a reader to interact. 
 
 
-In order to progress the project futher, some of the further work ideas have been addressed.
+In order to progress the project further, some of the further work ideas have been addressed.
 
 # Further Work Attempted - Additional Predictors
 
