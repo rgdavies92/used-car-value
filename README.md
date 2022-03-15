@@ -369,7 +369,7 @@ The further modelling work undertaken with dealer county and boot size predictor
 
 # Key Learnings and Challenges
 
-This project allowed me to approach a number of different challenges.
+This project allowed me to approach a number of different challenges:
 
 * In terms of time management it would have been easier to pick a capstone project with a ready-made dataset, however I did enjoy the challenge of scraping one for myself. I think that the size and the quality of the dataset gathered was influential in achieving good model performance. For example the model variance was reduced when incorporating all cars rather than the subset.
 
