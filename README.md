@@ -233,7 +233,7 @@ With the ELI5 analysis of the final model in place, the inner workings of the mo
 
 With the model finalised it was then possible to test the hypothesis; <i>is a Dacia cheaper than a Volvo?</i>
 
-To verify this hypothesis, a series of synthetics used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs plotted below in figure 13. 
+To verify this hypothesis, a series of synthetic used cars were generated with identical attributes other than the car brand. These cars were then pushed into the model for price prediction and the outputs plotted below in figure 13. 
 
 <br>
 <p align="center" width="100%">
